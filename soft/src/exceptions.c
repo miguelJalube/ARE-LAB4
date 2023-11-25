@@ -39,6 +39,8 @@
 
 //#define DEBUG_EXCEPTIONS 1
 
+extern volatile int irq_raised;
+
 // Define the IRQ exception handler
 void __attribute__ ((interrupt)) __cs3_isr_irq (void)
 {
@@ -50,8 +52,14 @@ void __attribute__ ((interrupt)) __cs3_isr_irq (void)
 	int interrupt_ID = *((int*)ICCIAR);
 	
 	// Handle the interrupt if it comes from the timer
-	if(interrupt_ID == TIMER_IRQ){
+	if(interrupt_ID == TIMER_IRQ){		
+		// Toggle led9
 		hps_timer_ISR();
+
+		irq_raised = 1;
+		
+		// Read the status register to clear the interrupt
+		OSC1_0_REG(OSC1_CLEAR_OFFSET);
 	}else{
 		while(1);
 	}
@@ -177,15 +185,6 @@ void config_interrupt(int N, int CPU_target) {
 * This routine TODO comment
 *******************************************************************/
 void hps_timer_ISR(void) {
-	// To clear the interrupt we need to read the end of interrupt register
-	#ifdef DEBUG_EXCEPTIONS
-		printf("Timer interrupt catched\n");
-	#endif
-
-	interrupt_catched=1;
-	
-	// Read the status register
-	OSC1_0_REG(OSC1_CLEAR_OFFSET);
-
-	return;
+	// Toggle led9
+	Leds_toggle(0x200);
 }

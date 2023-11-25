@@ -31,17 +31,15 @@
 
 int __auto_semihosting;
 
-//#define DEBUG           1
+//#define DEBUG             1
 
-#define ID_ADDR         AXI_LW_REG(0)
-
-#define SW98_MASK       0x300
-#define SW71_MASK       0x0FF
-
-#define N_KEYS          4
-#define N_HEX           4
-
-#define CLOCK_FREQ      25000000
+#define ID_ADDR             AXI_LW_REG(0)
+#define SW98_MASK           0x300
+#define SW71_MASK           0x0FF
+#define N_KEYS              4
+#define N_HEX               4
+#define CLOCK_FREQ          25000000
+#define TICKS_PER_SECOND    10
 
 // Update pressed keys
 void update_pressed(bool *pressed, size_t size){
@@ -70,7 +68,7 @@ void display_timer(uint32_t timer_value_tenths){
     Seg7_write_hex(3, hundreds_seconds);
 }
 
-volatile int interrupt_catched = 0;
+volatile int irq_raised = 0;
 
 int main(void){
 
@@ -111,14 +109,10 @@ int main(void){
 
     // Display ID constant
     printf("[main] ID : %#X\n", (unsigned)ID_ADDR);
-
     
-    // Timer init
-    // period set to 0.1s
-    uint32_t count = 2500000;
-
     // Load timer period
-    Timer_init(count);
+    // Count value = 25MHz / 10 = 2500000
+    Timer_init(CLOCK_FREQ / TICKS_PER_SECOND);
 
     // Main program loop
     while(1){
@@ -188,12 +182,9 @@ int main(void){
         pressed[3] = pressed_edge[3];
 
         // Timer interrupt
-        if(interrupt_catched && timer_on){
-            // Clear interrupt
-            interrupt_catched = 0;
-
-            // Toggle led 9
-            Leds_toggle(0x200);
+        if(irq_raised && timer_on){
+            // Ack
+            irq_raised = 0;
 
             // décrement timer value
             timer_value--;
