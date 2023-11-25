@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;hps_timer_irq&apos;" deleteContents="true" description="Delete resource &apos;hps_timer_irq&apos;" element1="/hps_timer_irq" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1700221296772"/>
+</session>

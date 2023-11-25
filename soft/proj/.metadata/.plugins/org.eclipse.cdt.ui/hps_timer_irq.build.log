@@ -1,0 +1,15 @@
+16:17:40 **** Incremental Build of configuration Debug for project hps_timer_irq ****
+make all 
+Building file: /home/reds/Desktop/ARE/lab4/hps_timer_irq/soft/src/app_timer_irq.c
+Invoking: GCC C Compiler 6.2.0 [arm-altera-eabi]
+arm-altera-eabi-gcc -O0 -g -Wall -MMD -MP -MF"src/app_timer_irq.d" -MT"src/app_timer_irq.o" -c -o "src/app_timer_irq.o" "/home/reds/Desktop/ARE/lab4/hps_timer_irq/soft/src/app_timer_irq.c"
+Finished building: /home/reds/Desktop/ARE/lab4/hps_timer_irq/soft/src/app_timer_irq.c
+ 
+Building target: hps_timer_irq.axf
+Invoking: GCC C Linker 6.2.0 [arm-altera-eabi]
+arm-altera-eabi-gcc -T "/opt/intelFPGA/18.1/University_Program/Monitor_Program/build/altera-socfpga-hosted-with-vectors.ld" -Wl,--defsym -Wl,arm_program_mem=0x40 -Wl,--defsym -Wl,arm_available_mem_size=0x3fffffb8 -Wl,--defsym -Wl,__cs3_stack=0x3ffffff8 -Wl,--section-start -Wl,.vectors=0x0 -o "hps_timer_irq.axf"  ./src/app_timer_irq.o ./src/exceptions.o ./src/pio_function.o   
+Finished building target: hps_timer_irq.axf
+ 
+
+16:17:40 Build Finished. 0 errors, 0 warnings. (took 400ms)
+

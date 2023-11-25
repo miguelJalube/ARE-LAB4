@@ -1,0 +1,4 @@
+#Fri Nov 24 14:30:43 CET 2023
+options.trace.traceCapture=none
+options.coreTrace.core0=false
+options.trace.traceCapture.modelCapture.traceBufferSize=4GB
