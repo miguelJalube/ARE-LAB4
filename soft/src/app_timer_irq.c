@@ -124,15 +124,17 @@ int main(void){
                 printf("[main] KEY0 pressed\n");
             #endif
 
-            // Key 0 pressed
-            // timer start
-            Timer_start();
-            
-            // Timer on
-            timer_on = true;
+            if(timer_value != 0){
+                // Key 0 pressed
+                // timer start
+                Timer_start();
+                
+                // Timer on
+                timer_on = true;
 
-            // Turn on led 8
-            Leds_set(0x100);
+                // Turn on led 8
+                Leds_set(0x100);
+            }
         }
         pressed[0] = pressed_edge[0];
 
