@@ -90,19 +90,3 @@ L'affichage doit respecter les conditions suivantes :
 - L'état de la Led8 représente si le minuteur est actif ou non.
 - Lors de chaque interruption du timer (chaque 100ms), un toogle de la Led9 est effectué.
 
-## Travail demandé
-
-
-1. Rechercher dans la documentation du HPS (cyclone-v_hps_trm_5v4.pdf) les informations concernant l'utilisation du timer module 0. Identifier les configurations nécessaires pour son utilisation avec les interruptions.
-2. Rechercher dans la documentation du HPS : Quel est le numéro de la ligne d'interruption GIC qui correspond au timer à utiliser ?
-3. Étudier la documentation concernant la mise en œuvre des interruptions GIC dans le HPS (cyclone-v_hps_interrupt_manual_GIC_18.1.pdf).
-4. Sur Cyberlearn, récupérer l'archive du projet et la décompresser. Puis générer le bitstream du projet.
-5. Lors de la création de votre projet dans ARM-DS, respecter les informations données dans le document (Utilisation_armds_avec_interruption.pdf).
-6. Écrire vos fonctions C qui permettent d'initialiser votre timer et de l'utiliser. Pour les autres périphériques (Leds, switchs, boutons, afficheurs 7 segments), vous pouvez utiliser vos fonctions développées pendant le laboratoire 2.
-7. Écrire les fonctions d'initialisation et de configuration des interruptions.
-   - Compléter la fonction config_GIC() du fichier exceptions.c fourni. La fonction doit configurer le GIC pour utiliser l'interruption du timer.
-   - Compléter la routine d'interruption \_\_cs3\_isr\_irq() du fichier exceptions.c fourni. La routine d'interruption doit être la plus rapide possible.
-   - Écrire une routine d'interruption hps\_timer\_ISR() dédiée aux interruptions du timer.
-8. Tester les interruptions sur la carte DE1-SoC en complétant l'application principal.
-   - Appeler les différentes fonctions d'initialisation écrites
-
